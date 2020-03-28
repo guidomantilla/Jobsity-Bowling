@@ -2,5 +2,5 @@ package bowling.shell.core;
 
 public interface BowlingService {
 
-	String bowl(String fileInPath, String fileOutPath);
+	String score(String fileInPath, String fileOutPath);
 }

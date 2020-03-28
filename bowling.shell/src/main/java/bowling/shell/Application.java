@@ -57,7 +57,7 @@ public class Application {
 
 			switch (implementation) {
 			case "default":
-				message = bowlingService.bowl(originPath, destinationPath);
+				message = bowlingService.score(originPath, destinationPath);
 				break;
 
 			case "streams":

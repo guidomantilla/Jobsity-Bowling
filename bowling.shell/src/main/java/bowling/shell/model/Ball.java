@@ -1,15 +1,15 @@
 package bowling.shell.model;
 
-public class FrameChance {
+public class Ball {
 
 	private String name;
 	private String score;
 
-	public FrameChance() {
+	public Ball() {
 		this(null, null);
 	}
 
-	public FrameChance(String name, String score) {
+	public Ball(String name, String score) {
 		this.name = name;
 		this.score = score;
 	}
