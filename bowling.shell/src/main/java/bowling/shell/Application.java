@@ -43,9 +43,6 @@ public class Application {
 	@ShellMethod(value = "This method bowl based on a list from a file.", key = "bowl")
 	public String bowl(
 
-			@ShellOption(value = { "-i",
-					"--impl" }, defaultValue = "default", help = "This parameter defines the implementation type for the Job") String implementation,
-
 			@ShellOption(value = { "-op",
 					"--origin-path" }, help = "This parameter defines the origin path") String originPath,
 
@@ -55,20 +52,7 @@ public class Application {
 		String message = "";
 		if (validatePath(originPath) && validatePath(destinationPath)) {
 
-			switch (implementation) {
-			case "default":
-				message = bowlingService.score(originPath, destinationPath);
-				break;
-
-			case "streams":
-				// new StreamsWebCrawlerService().crawl(patternList, originPath,
-				// destinationPath);
-				break;
-
-			default:
-				message = "ERROR: The impl parameter may not be valid.";
-				break;
-			}
+			message = bowlingService.score(originPath, destinationPath);
 
 		} else {
 			message = "ERROR: The path parameters may not be valid.";
