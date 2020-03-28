@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: bowling.shell.util.StringUtilTest
--------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.466 s - in bowling.shell.util.StringUtilTest
