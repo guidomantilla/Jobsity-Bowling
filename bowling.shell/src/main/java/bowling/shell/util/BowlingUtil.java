@@ -15,11 +15,17 @@ public class BowlingUtil {
 		return !Objects.isNull(ball) && !Objects.isNull(ball.getScore());
 	}
 
-	public static boolean isStrike(Frame frame) {
-		return isBallScoreValid(frame.getBall01()) && Objects.equals("10", frame.getBall01().getScore());
+	public static boolean isSpare(Frame frame) {
+		return retrieveScoreInt(frame.getBall01()) != 10
+				&& retrieveScoreInt(frame.getBall01()) + retrieveScoreInt(frame.getBall02()) == 10;
 	}
 
-	public static boolean isSpare(Frame frame) {
+	public static boolean isStrike(Frame frame) {
+
+		return retrieveScoreInt(frame.getBall01()) == 10 && retrieveScoreInt(frame.getBall02()) == 0;
+	}
+
+	public static boolean isFrameValid(Frame frame) {
 
 		int a = retrieveScoreInt(frame.getBall01());
 		int b = retrieveScoreInt(frame.getBall02());
@@ -33,12 +39,12 @@ public class BowlingUtil {
 
 	public static boolean canHaveExtraBall(Frame frame) {
 
-		if (isStrike(frame)) {
-			return true;
-		}
-
 		int a = retrieveScoreInt(frame.getBall01());
 		int b = retrieveScoreInt(frame.getBall02());
+
+		if (a == 10) {
+			return true;
+		}
 
 		if (a + b == 10) {
 			return true;
@@ -53,7 +59,7 @@ public class BowlingUtil {
 
 			return Integer.parseInt(ball.getScore());
 
-		} catch (NumberFormatException e) {
+		} catch (NullPointerException | NumberFormatException e) {
 
 			return 0;
 		}
