@@ -1,4 +1,4 @@
-package bowling.shell.core;
+package bowling.shell.core.impl;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bowling.shell.core.BowlingService;
 import bowling.shell.core.manager.BowlingBallFileParser;
 import bowling.shell.core.manager.BowlingReportBuilder;
 import bowling.shell.core.manager.BowlingSheetCreator;
