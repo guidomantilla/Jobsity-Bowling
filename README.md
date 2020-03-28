@@ -13,7 +13,7 @@ After the installation, you will see on your console spring-shell prompt (**shel
 Here you can type:
 * **shell:>bowl -op _origin_path_**.
 The parameters are:
-1. **origin path**: flags **-op** or **--origin-path**.
+1. **origin_path**: flags **-op** or **--origin-path**.
     - This parameter defines the source path of the file that contains the bowling match scores.
     - This parameter is **_Mandatory_**.
          
