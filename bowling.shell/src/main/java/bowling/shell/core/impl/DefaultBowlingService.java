@@ -47,10 +47,7 @@ public class DefaultBowlingService implements BowlingService {
 			bowlingScoreCalculator.calculateScore(bowlingSheet);
 
 			List<String> scoreReport = bowlingReportBuilder.buildReport(bowlingSheet);
-
-			for (String line : scoreReport) {
-				System.out.println(line);
-			}
+			scoreReport.forEach(line -> System.out.println(line));
 
 			message = "Bowling Score Displayed";
 
