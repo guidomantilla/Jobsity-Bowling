@@ -8,5 +8,5 @@ import bowling.shell.model.Sheet;
 
 public interface BowlingSheetCreator {
 
-	Sheet calculateScore(List<Ball> ballList) throws BowlingException;
+	Sheet createSheet(List<Ball> ballList) throws BowlingException;
 }
