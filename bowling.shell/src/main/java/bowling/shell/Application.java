@@ -44,15 +44,12 @@ public class Application {
 	public String bowl(
 
 			@ShellOption(value = { "-op",
-					"--origin-path" }, help = "This parameter defines the origin path") String originPath,
-
-			@ShellOption(value = { "-dp",
-					"--destination-path" }, help = "This parameter defines the destination path") String destinationPath) {
+					"--origin-path" }, help = "This parameter defines the origin path") String originPath) {
 
 		String message = "";
-		if (validatePath(originPath) && validatePath(destinationPath)) {
+		if (validatePath(originPath)) {
 
-			message = bowlingService.score(originPath, destinationPath);
+			message = bowlingService.score(originPath);
 
 		} else {
 			message = "ERROR: The path parameters may not be valid.";

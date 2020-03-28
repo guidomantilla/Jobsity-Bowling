@@ -6,7 +6,7 @@ public class Frame {
 	private Ball ball02;
 	private Ball ball03;
 
-	private int score;
+	private Integer score;
 
 	public Frame() {
 		this(null, null);
@@ -51,11 +51,11 @@ public class Frame {
 		this.ball03 = ball03;
 	}
 
-	public int getScore() {
+	public Integer getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(Integer score) {
 		this.score = score;
 	}
 

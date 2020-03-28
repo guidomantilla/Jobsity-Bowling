@@ -35,7 +35,7 @@ public class DefaultBowlingService implements BowlingService {
 	private BowlingBallFileParser bowlingBallFileParser;
 
 	@Override
-	public String score(String fileInPath, String fileOutPath) {
+	public String score(String fileInPath) {
 
 		String message = "";
 		try {
@@ -50,8 +50,9 @@ public class DefaultBowlingService implements BowlingService {
 
 			for (String line : scoreReport) {
 				System.out.println(line);
-
 			}
+
+			message = "Bowling Score Displayed";
 
 		} catch (IOException | BowlingException e) {
 			message = e.getMessage();
