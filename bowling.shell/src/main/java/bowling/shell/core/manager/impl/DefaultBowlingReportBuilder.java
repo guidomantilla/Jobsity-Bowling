@@ -22,7 +22,7 @@ public class DefaultBowlingReportBuilder implements BowlingReportBuilder {
 
 	/**
 	 * This method builds the report
-	 * 
+	 *
 	 * @param bowlingSheet
 	 * @return
 	 * @throws BowlingException
@@ -37,13 +37,13 @@ public class DefaultBowlingReportBuilder implements BowlingReportBuilder {
 
 		for (String name : bowlingSheet.keySet()) {
 
-			String player = StringUtils.rightPad(" " + name, 100);
+			String player = StringUtils.rightPad(name, 100);
 			scoreReport.add(player);
 
 			Frame[] frameArray = bowlingSheet.get(name).getFrameArray();
 
-			String framePinfallsLine = StringUtils.rightPad("  Pinfalls", LABEL_COLUMN_WIDTH);
-			String frameScoreLine = StringUtils.rightPad("  Score", LABEL_COLUMN_WIDTH);
+			String framePinfallsLine = StringUtils.rightPad("Pinfalls", LABEL_COLUMN_WIDTH);
+			String frameScoreLine = StringUtils.rightPad("Score", LABEL_COLUMN_WIDTH);
 
 			for (Frame frame : frameArray) {
 
@@ -51,19 +51,18 @@ public class DefaultBowlingReportBuilder implements BowlingReportBuilder {
 					continue;
 				}
 				framePinfallsLine += StringUtils.leftPad(buildBallPinfallsLine(frame), FRAME_COLUMN_WIDTH);
-				frameScoreLine += StringUtils.leftPad("" + (frame.getScore()), FRAME_COLUMN_WIDTH);
+				frameScoreLine += StringUtils.rightPad("" + (frame.getScore()), FRAME_COLUMN_WIDTH);
 			}
 
 			scoreReport.add(framePinfallsLine);
 			scoreReport.add(frameScoreLine);
-			scoreReport.add("");
 		}
 		return scoreReport;
 	}
 
 	/**
 	 * This method build each ball info
-	 * 
+	 *
 	 * @param frame
 	 * @return
 	 */
@@ -78,7 +77,7 @@ public class DefaultBowlingReportBuilder implements BowlingReportBuilder {
 			if (Objects.equals("10", score)) {
 				score = "X";
 			}
-			ballPinfallsLine += StringUtils.leftPad(score, BALL_COLUMN_WIDTH);
+			ballPinfallsLine += StringUtils.rightPad(score, BALL_COLUMN_WIDTH);
 		}
 
 		if (!Objects.isNull(frame.getBall02())) {
@@ -87,13 +86,23 @@ public class DefaultBowlingReportBuilder implements BowlingReportBuilder {
 			if (BowlingUtil.isSpare(frame)) {
 				score = "/";
 			}
-			ballPinfallsLine += StringUtils.leftPad(score, BALL_COLUMN_WIDTH);
+			if (Objects.equals("10", score)) {
+				score = "X";
+			}
+			ballPinfallsLine += StringUtils.rightPad(score, BALL_COLUMN_WIDTH);
 		}
 
 		if (!Objects.isNull(frame.getBall03())) {
 
 			score = frame.getBall03().getScore();
-			ballPinfallsLine += StringUtils.leftPad(score, BALL_COLUMN_WIDTH);
+			if (Objects.equals("10", score)) {
+				score = "X";
+			}
+			ballPinfallsLine += StringUtils.rightPad(score, BALL_COLUMN_WIDTH);
+
+		} else {
+
+			ballPinfallsLine += StringUtils.rightPad("", BALL_COLUMN_WIDTH);
 		}
 
 		return ballPinfallsLine;
@@ -101,14 +110,14 @@ public class DefaultBowlingReportBuilder implements BowlingReportBuilder {
 
 	/**
 	 * This method builds the Frame Header Line
-	 * 
+	 *
 	 * @return
 	 */
 	private String buildFrameHeaderLine() {
 
 		String frameHeaderLine = StringUtils.rightPad("Frame", LABEL_COLUMN_WIDTH);
 		for (int i = 0; i < 10; i++) {
-			frameHeaderLine += StringUtils.leftPad("" + (i + 1), FRAME_COLUMN_WIDTH);
+			frameHeaderLine += StringUtils.rightPad("" + (i + 1), FRAME_COLUMN_WIDTH);
 		}
 
 		return frameHeaderLine;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import bowling.shell.core.BowlingService;
 import bowling.shell.core.manager.BowlingBallFileParser;
 import bowling.shell.core.manager.BowlingReportBuilder;
+import bowling.shell.core.manager.BowlingReportPrinter;
 import bowling.shell.core.manager.BowlingScoreCalculator;
 import bowling.shell.core.manager.BowlingSheetCreator;
 import bowling.shell.exception.BowlingException;
@@ -21,6 +22,9 @@ import bowling.shell.model.Sheet;
 public class DefaultBowlingService implements BowlingService {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(DefaultBowlingService.class);
+
+	@Autowired
+	private BowlingReportPrinter bowlingReportPrinter;
 
 	@Autowired
 	private BowlingReportBuilder bowlingReportBuilder;
@@ -47,7 +51,7 @@ public class DefaultBowlingService implements BowlingService {
 			bowlingScoreCalculator.calculateScore(bowlingSheet);
 
 			List<String> scoreReport = bowlingReportBuilder.buildReport(bowlingSheet);
-			scoreReport.forEach(line -> System.out.println(line));
+			bowlingReportPrinter.printReport(scoreReport);
 
 			message = "Bowling Score Displayed";
 

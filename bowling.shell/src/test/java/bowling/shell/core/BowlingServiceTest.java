@@ -16,10 +16,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import bowling.shell.core.impl.DefaultBowlingService;
 import bowling.shell.core.manager.BowlingBallFileParser;
 import bowling.shell.core.manager.BowlingReportBuilder;
+import bowling.shell.core.manager.BowlingReportPrinter;
 import bowling.shell.core.manager.BowlingScoreCalculator;
 import bowling.shell.core.manager.BowlingSheetCreator;
 import bowling.shell.core.manager.impl.DefaultBowlingBallFileParser;
 import bowling.shell.core.manager.impl.DefaultBowlingReportBuilder;
+import bowling.shell.core.manager.impl.DefaultBowlingReportPrinter;
 import bowling.shell.core.manager.impl.DefaultBowlingScoreCalculator;
 import bowling.shell.core.manager.impl.DefaultBowlingSheetCreator;
 import bowling.shell.exception.BowlingException;
@@ -33,6 +35,11 @@ public class BowlingServiceTest {
 		@Bean
 		public BowlingService bowlingService() {
 			return new DefaultBowlingService();
+		}
+
+		@Bean
+		public BowlingReportPrinter bowlingReportPrinter() {
+			return new DefaultBowlingReportPrinter();
 		}
 
 		@Bean
