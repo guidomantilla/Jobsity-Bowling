@@ -6,62 +6,48 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import org.springframework.shell.standard.ShellOption;
-import org.springframework.util.StringUtils;
 
 import bowling.shell.core.BowlingService;
 
 @SpringBootApplication
 @EnableConfigurationProperties
 @ComponentScan(basePackages = { "bowling.shell" })
-@ShellComponent
-public class Application {
+public class Application implements CommandLineRunner {
 
 	public static void main(String[] args) throws IOException {
 
-		String[] disabledCommands = { "--spring.shell.command.quit.enabled=false" };
-		String[] fullArgs = StringUtils.concatenateStringArrays(args, disabledCommands);
-		SpringApplication.run(Application.class, fullArgs);
+		SpringApplication.run(Application.class, args);
 	}
-
-	/*
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
 
 	@Autowired
 	private BowlingService bowlingService;
 
-	@ShellMethod(value = "This method bowl based on a list from a file.", key = "bowl")
-	public String bowl(
-
-			@ShellOption(value = { "-op",
-					"--origin-path" }, help = "This parameter defines the origin path") String originPath) {
+	@Override
+	public void run(String... args) throws Exception {
 
 		String message = "";
-		if (validatePath(originPath)) {
 
-			message = bowlingService.score(originPath);
+		if (args.length != 1) {
+
+			message = "ERROR: Too many parameters as input.";
 
 		} else {
-			message = "ERROR: The path parameters may not be valid.";
+
+			String originPath = args[0];
+			if (validatePath(originPath)) {
+
+				message = bowlingService.score(originPath);
+
+			} else {
+				message = "ERROR: The path parameters may not be valid.";
+			}
 		}
-
-		return message;
-	}
-
-	@ShellMethod(value = "Force quit from the application", key = "quit")
-	public String quit() {
-		System.exit(0);
-		return "";
+		System.out.println(message);
 	}
 
 	private boolean validatePath(String path) {
